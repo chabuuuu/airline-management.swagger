@@ -1,0 +1,578 @@
+openapi: 3.1.0
+info:
+  title: Airline management API Documentation
+  version: 0.1.0
+  description: This is airline manageement   CRUD API application made with Express and documented with Swagger
+  license:
+    name: MIT
+    url: https://spdx.org/licenses/MIT.html
+  contact:
+    name: Thinh Ha
+    email: haphuthinh332004@gmail.com
+servers:
+  - url: http://localhost:3000/api/v1
+paths:
+  /account/create:
+    post:
+      summary: Create a account user.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAccountDto'
+      responses:
+        '200':
+          description: The account was successfully created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateAccount200Response'
+  /airplane:
+    post:
+      summary: Create a new airplane
+      tags:
+        - airplane
+      description: ''
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAirplaneDto'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AirplaneSuccessResponse'
+    get:
+      summary: Get all airplane
+      tags:
+        - airplane
+      description: Get all airplane
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AirplaneSuccessResponse'
+  /airplane/:id:
+    put:
+      summary: Update a airplane by id
+      tags:
+        - airplane
+      description: Update airplane infomation by id
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: Numeric airplane ID to update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdareAirplaneDto'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AirplaneSuccessResponse'
+    delete:
+      summary: Delete a airplane by id
+      tags:
+        - airplane
+      description: ''
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: Numeric airplane ID to delete
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AirplaneSuccessResponse'
+    get:
+      summary: Get a airplane info by id
+      tags:
+        - airplane
+      description: ''
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: Numeric airplane ID to get
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AirplaneSuccessResponse'
+  /flight:
+    post:
+      summary: Create a new flight
+      tags:
+        - flight
+      description: ''
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateFlightDto'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateFlightSuccessResponse'
+    get:
+      summary: Get all flights
+      tags:
+        - flight
+      description: Get all flights
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetOneFlightSuccessResponse'
+  /flight/:id:
+    put:
+      summary: Update a flight by id
+      tags:
+        - flight
+      description: Update flight infomation by id
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: Flight ID to update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateFlightDto'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateFlightSuccessResponse'
+    delete:
+      summary: Delete a flight by id
+      tags:
+        - flight
+      description: ''
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: Flight ID to delete
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteFlightSuccessResponse'
+    get:
+      summary: Get a flight info by id
+      tags:
+        - flight
+      description: ''
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: Flight ID to get
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetOneFlightSuccessResponse'
+components:
+  schemas:
+    CreateAccountDto:
+      properties:
+        roleId:
+          type: string
+          example: 1
+          minLength: 1
+        email:
+          type: string
+          minLength: 1
+          example: haphthinh@gmail.com
+        password:
+          type: string
+          minLength: 1
+          example: '@1Hkdsadas'
+        fullname:
+          type: string
+          minLength: 1
+          example: Thinh Ha
+        address:
+          type: string
+          minLength: 1
+          example: UIT
+        phone_number:
+          type: string
+          minLength: 1
+          example: '+8490123456789'
+        birthday:
+          type: string
+          minLength: 1
+          example: '2004-03-03'
+      type: object
+      required:
+        - roleId
+        - email
+        - password
+        - fullname
+        - address
+        - phone_number
+        - birthday
+    CreateAccount200Response:
+      properties:
+        roleId:
+          type: string
+          example: cnxcasdasd
+          minLength: 1
+        email:
+          type: string
+          minLength: 1
+          example: test@gmail.com
+        fullname:
+          type: string
+          minLength: 1
+        address:
+          type: string
+          minLength: 1
+        phone_number:
+          type: string
+          minLength: 1
+        birthday:
+          type: string
+          minLength: 1
+        id:
+          type: string
+          example: fc6dcb64-a8fe-4e7c-bf8e-f9801d3b9321
+        created_at:
+          type: string
+          example: '2021-09-29T09:00:00.000Z'
+        updated_at:
+          type: string
+          example: '2021-09-29T09:00:00.000Z'
+      type: object
+    CreateAirplaneDto:
+      properties:
+        flightId:
+          type: string
+          example: 125
+        airplaneModel:
+          maximum: 20
+          type: string
+          example: Boeing 737
+          minLength: 1
+        airlines:
+          maximum: 30
+          type: string
+          minLength: 1
+          example: VIETJET
+      type: object
+      required:
+        - airplaneModel
+        - airlines
+    AirplaneSuccessResponse:
+      properties:
+        flightId:
+          type: string
+          example: 125
+        airplaneModel:
+          maximum: 20
+          type: string
+          example: Boeing 737
+          minLength: 1
+        airlines:
+          maximum: 30
+          type: string
+          minLength: 1
+          example: VIETJET
+        airplaneId:
+          type: string
+          example: fc6dcb64-a8fe-4e7c-bf8e-f9801d3b9321
+      type: object
+    UpdareAirplaneDto:
+      properties:
+        flightId:
+          type: string
+          example: 125
+        airplaneModel:
+          maximum: 20
+          type: string
+          example: Boeing 737
+          minLength: 1
+        airlines:
+          maximum: 30
+          type: string
+          minLength: 1
+          example: VIETJET
+      type: object
+    CreateFlightDto:
+      properties:
+        flightCode:
+          minLength: 1
+          type: string
+          example: VN123
+        departureAirportId:
+          type: number
+          minLength: 1
+          example: 2258
+        arrivalAirportId:
+          type: number
+          minLength: 1
+          example: 8820
+        departureTime:
+          type: string
+          format: date-time
+          example: '2021-10-10T10:00:00.000Z'
+        flightDuration:
+          type: number
+          minLength: 1
+          example: 2.5
+        economyPrice:
+          type: number
+          minLength: 1
+          example: 20000000
+        businessPrice:
+          type: number
+          minLength: 1
+          example: 20000000
+        status:
+          enum:
+            - Chưa khởi hành
+            - Đang bay
+            - Đã hoàn thành
+          type: string
+        description:
+          type: string
+          example: Chuyến bay đến sân bay Nội Bài
+      type: object
+      required:
+        - flightCode
+        - departureAirportId
+        - arrivalAirportId
+        - departureTime
+        - flightDuration
+        - economyPrice
+        - businessPrice
+    CreateFlightSuccessResponse:
+      properties:
+        flightCode:
+          minLength: 1
+          type: string
+          example: VN123
+        departureAirportId:
+          type: number
+          minLength: 1
+          example: 2258
+        arrivalAirportId:
+          type: number
+          minLength: 1
+          example: 8820
+        departureTime:
+          type: string
+          format: date-time
+          example: '2021-10-10T10:00:00.000Z'
+        flightDuration:
+          type: number
+          minLength: 1
+          example: 2.5
+        economyPrice:
+          type: number
+          minLength: 1
+          example: 20000000
+        businessPrice:
+          type: number
+          minLength: 1
+          example: 20000000
+        status:
+          enum:
+            - Chưa khởi hành
+            - Đang bay
+            - Đã hoàn thành
+          type: string
+        description:
+          type: string
+          example: Chuyến bay đến sân bay Nội Bài
+      type: object
+    UpdateFlightDto:
+      properties:
+        flightCode:
+          type: string
+          example: VN123
+        departureAirportId:
+          type: number
+          example: 2258
+        arrivalAirportId:
+          type: number
+          example: 8820
+        departureTime:
+          type: string
+          example: '2021-10-10T10:00:00.000Z'
+        flightDuration:
+          type: number
+          example: 2.5
+        economyPrice:
+          type: number
+          example: 29000000
+        businessPrice:
+          type: number
+          example: 90000000
+        status:
+          enum:
+            - Chưa khởi hành
+            - Đang bay
+            - Đã hoàn thành
+          type: string
+          example: Đang bay
+        description:
+          type: string
+          example: Chuyến bay đến sân bay Nội Bài
+      type: object
+    UpdateFlightSuccessResponse:
+      properties:
+        flightCode:
+          type: string
+          example: VN123
+        departureAirportId:
+          type: number
+          example: 2258
+        arrivalAirportId:
+          type: number
+          example: 8820
+        departureTime:
+          type: string
+          example: '2021-10-10T10:00:00.000Z'
+        flightDuration:
+          type: number
+          example: 2.5
+        economyPrice:
+          type: number
+          example: 29000000
+        businessPrice:
+          type: number
+          example: 90000000
+        status:
+          enum:
+            - Chưa khởi hành
+            - Đang bay
+            - Đã hoàn thành
+          type: string
+          example: Đang bay
+        description:
+          type: string
+          example: Chuyến bay đến sân bay Nội Bài
+      type: object
+    DeleteFlightSuccessResponse:
+      properties:
+        flightCode:
+          type: string
+          example: VN123
+        departureAirportId:
+          type: number
+          example: 2258
+        arrivalAirportId:
+          type: number
+          example: 8820
+        departureTime:
+          type: string
+          example: '2021-10-10T10:00:00.000Z'
+        flightDuration:
+          type: number
+          example: 2.5
+        economyPrice:
+          type: number
+          example: 29000000
+        businessPrice:
+          type: number
+          example: 90000000
+        status:
+          enum:
+            - Chưa khởi hành
+            - Đang bay
+            - Đã hoàn thành
+          type: string
+          example: Đang bay
+        description:
+          type: string
+          example: Chuyến bay đến sân bay Nội Bài
+      type: object
+    GetOneFlightSuccessResponse:
+      properties:
+        flightCode:
+          type: string
+          example: VN123
+        departureAirportId:
+          type: number
+          example: 2258
+        arrivalAirportId:
+          type: number
+          example: 8820
+        departureTime:
+          type: string
+          example: '2021-10-10T10:00:00.000Z'
+        flightDuration:
+          type: number
+          example: 2.5
+        economyPrice:
+          type: number
+          example: 29000000
+        businessPrice:
+          type: number
+          example: 90000000
+        status:
+          enum:
+            - Chưa khởi hành
+            - Đang bay
+            - Đã hoàn thành
+          type: string
+          example: Đang bay
+        description:
+          type: string
+          example: Chuyến bay đến sân bay Nội Bài
+      type: object
+tags: []
