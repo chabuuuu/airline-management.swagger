@@ -36,6 +36,6 @@ app.use(
     swaggerUi.setup(specs,  { explorer: true })
   );
 
-app.listen(3000, () => {
+app.listen(4000, () => {
     console.log('Server is running on port 3000')
 })
